@@ -10,6 +10,7 @@ public class JumpSlide : MonoBehaviour
     float jumpGravity = -150f;
     float realGravity = -9.8f;
     public Rigidbody rb;
+    public Collider bc;
 
     private void Update()
     {
@@ -19,6 +20,10 @@ public class JumpSlide : MonoBehaviour
             rb.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
             Physics.gravity = new Vector3(0, jumpGravity, 0);
             StartCoroutine(StopJumpCororutine());
+        }
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            bc.transform.localScale = new Vector3(1, 0.5f, 1);
         }
         
     }
