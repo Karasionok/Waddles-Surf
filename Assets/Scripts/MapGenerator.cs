@@ -44,8 +44,8 @@ public class MapGenerator : MonoBehaviour
         instance = this;
         mapSize = itemCountInMap * itemSpace;
         maps.Add(MakeMap1());
-        maps.Add(MakeMap1());
-        maps.Add(MakeMap1());
+        // maps.Add(MakeMap2());
+        // maps.Add(MakeMap3());
         foreach (GameObject map in maps)
         {
             map.SetActive(false);
@@ -134,7 +134,7 @@ public class MapGenerator : MonoBehaviour
                 obstaclePos = new Vector3((int)trackPos * laneOffset, 1.7f, i * itemSpace);
             }
 
-            CreateCoins(coinStyle, obstaclePos, result);
+            // CreateCoins(coinStyle, obstaclePos, result);
 
             if (obstacle != null)
             {

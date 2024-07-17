@@ -19,7 +19,7 @@ public class RoadGenerator : MonoBehaviour
     void Start()
     {
         ResetLevel();
-        StartLevel();
+        // StartLevel();
     }
 
     public void StartLevel()
