@@ -4,15 +4,22 @@ using UnityEngine;
 
 public class RoadGenerator : MonoBehaviour
 {
+    static public RoadGenerator instance;
     public GameObject RoadPrefab;
     private List<GameObject> roads = new List<GameObject>();
     public float maxSpeed = 10;
-    private float speed  = 0;
+    public float speed  = 0;
     public int maxRoadCount = 5;
+
+    private void Awake() 
+    {
+        instance = this;
+    }
 
     void Start()
     {
         ResetLevel();
+        StartLevel();
     }
 
     public void StartLevel()
@@ -58,6 +65,7 @@ public class RoadGenerator : MonoBehaviour
         for (int i = 0; i < maxRoadCount; i++)
         {
             CreateNextRoad();
-        }    
+        }
+        MapGenerator.instance.ResetMaps();    
     }
 }

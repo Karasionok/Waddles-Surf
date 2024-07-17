@@ -9,21 +9,18 @@ using UnityEngine.PlayerLoop;
 
 public class PlayerControll: MonoBehaviour
 {
-    float laneOffset = 2.5f;
+    float laneOffset;
     float laneChangeSpeed = 15f;
     Rigidbody rb;
     Vector3 targetVelocity;
     float pointStart;
     float pointFinish;
-    bool isJumping = false;
-    float jumpPower = 150;
-    float jumpGravity = -150f;
-    float realGravity = -9.8f;
 
 
 
     void Start()
     {
+        laneOffset = MapGenerator.instance.laneOffset;
         rb = GetComponent<Rigidbody>();
     }
 
@@ -41,38 +38,23 @@ public class PlayerControll: MonoBehaviour
             pointFinish += laneOffset;
             targetVelocity = new Vector3(laneChangeSpeed, 0, 0);
         }
-        // if (Input.GetKeyDown(KeyCode.W) && isJumping == false)
-        // {
-        //     isJumping = true;
-        //     rb.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
-        //     Physics.gravity = new Vector3(0, jumpGravity, 0);
-        //     StartCoroutine(StopJumpCororutine());
-        // }
         float x = Mathf.Clamp(transform.position.x, Mathf.Min(pointStart, pointFinish), Mathf.Max(pointStart, pointFinish));
         transform.position = new Vector3(x, transform.position.y, transform.position.z);
     }
 
 
-    // IEnumerator StopJumpCororutine()
-    // {
-    //     do
-    //     {
-    //         yield return new WaitForSeconds(0.02f);
-    //     } while (rb.velocity.y != 0);
-    //     isJumping = false;
-    //     Physics.gravity = new UnityEngine.Vector3(0, realGravity, 0);
-    // }
-
     private void FixedUpdate()
     {
-        rb.velocity = targetVelocity;
+        Vector3 power = rb.velocity;
+        power.x = targetVelocity.x;
         if ((transform.position.x > pointFinish && targetVelocity.y > 0) ||
         (transform.position.x < pointFinish && targetVelocity.x < 0))
         {
             targetVelocity = Vector3.zero;
-            rb.velocity = targetVelocity;
-            rb.position = new Vector3(pointFinish, rb.position.y, rb.position.z);
+            power.x = targetVelocity.x;
+            power.x = pointFinish;
         }
+        rb.velocity = power;
     }
 
     public void ResetGame()

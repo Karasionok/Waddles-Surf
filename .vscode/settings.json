@@ -51,5 +51,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "Waddles Surf.sln"
+    "dotnet.defaultSolution": "Waddles-Surf.sln"
 }

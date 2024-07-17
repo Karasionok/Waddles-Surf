@@ -6,9 +6,9 @@ using UnityEngine;
 public class JumpSlide : MonoBehaviour
 {
     bool isJumping = false;
-    float jumpPower = 150;
-    float jumpGravity = -150f;
-    float realGravity = -9.8f;
+    public float jumpPower = 7;
+    public float jumpGravity = -18f;
+    public float realGravity = -9.8f;
     public Rigidbody rb;
     public Collider bc;
 
@@ -17,13 +17,17 @@ public class JumpSlide : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.W) && isJumping == false)
         {
             isJumping = true;
-            rb.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
             Physics.gravity = new Vector3(0, jumpGravity, 0);
+            rb.velocity += Vector3.up * jumpPower;
             StartCoroutine(StopJumpCororutine());
         }
         if (Input.GetKeyDown(KeyCode.S))
         {
             bc.transform.localScale = new Vector3(1, 0.5f, 1);
+        }
+        else if (Input.GetKeyUp(KeyCode.S))
+        {
+            bc.transform.localScale = new Vector3(1, 1, 1);
         }
         
     }
@@ -35,6 +39,6 @@ public class JumpSlide : MonoBehaviour
             yield return new WaitForSeconds(0.02f);
         } while (rb.velocity.y != 0);
         isJumping = false;
-        Physics.gravity = new UnityEngine.Vector3(0, realGravity, 0);
+        Physics.gravity = new Vector3(0, realGravity, 0);
     }
 }
