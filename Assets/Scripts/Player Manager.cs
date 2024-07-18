@@ -15,10 +15,11 @@ public class PlayerControll: MonoBehaviour
     Vector3 targetVelocity;
     float pointStart;
     float pointFinish;
+    public GameObject go;
 
 
 
-    void Start()
+    void Start() 
     {
         laneOffset = MapGenerator.instance.laneOffset;
         rb = GetComponent<Rigidbody>();
@@ -62,6 +63,7 @@ public class PlayerControll: MonoBehaviour
         pointStart = 0;
         pointFinish = 0;
         rb.velocity = Vector3.zero;
+
     }
 
     private void OnTriggerEnter(Collider other)
