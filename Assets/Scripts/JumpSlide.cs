@@ -7,7 +7,7 @@ using UnityEngine;
 public class JumpSlide : MonoBehaviour
 {
     bool isJumping = false;
-    public float jumpPower = 7;
+    public float jumpPower = 10;
     public float jumpGravity = -18f;
     public float realGravity = -9.8f;
     public Rigidbody rb;

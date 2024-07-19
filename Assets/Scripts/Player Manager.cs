@@ -65,12 +65,4 @@ public class PlayerControll: MonoBehaviour
         rb.velocity = Vector3.zero;
 
     }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.tag == "lose")
-        {
-            ResetGame();
-        }
-    }
 }
