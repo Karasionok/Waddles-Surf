@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class JumpSlide : MonoBehaviour
@@ -10,10 +11,12 @@ public class JumpSlide : MonoBehaviour
     public float jumpGravity = -18f;
     public float realGravity = -9.8f;
     public Rigidbody rb;
-    public Collider bc;
+    public GameObject go;
+    BoxCollider bc;
 
     private void Update()
     {
+        bc = go.GetComponent<BoxCollider>();
         if (Input.GetKeyDown(KeyCode.W) && isJumping == false)
         {
             isJumping = true;
@@ -23,11 +26,14 @@ public class JumpSlide : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.S))
         {
-            bc.transform.localScale = new Vector3(1, 0.5f, 1);
+            go.transform.localScale = new Vector3(1, 0.5f, 1);
+            bc.size -= new Vector3(0, 0.5f, 0);
         }
         else if (Input.GetKeyUp(KeyCode.S))
         {
-            bc.transform.localScale = new Vector3(1, 1, 1);
+            go.transform.localScale = new Vector3(1, 1, 1);
+            bc.size = new Vector3(1, 1, 1);
+            go.transform.position = new Vector3(go.transform.position.x, 1.2f, go.transform.position.z);
         }
         
     }
